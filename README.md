@@ -1,4 +1,4 @@
-# JARVIS — Your Local AI-Powered Execution Assistant
+<img width="1920" height="1080" alt="jarvis v0 2" src="https://github.com/user-attachments/assets/4b1962d1-d1a9-4672-a4c0-1262935dca18" /># JARVIS — Your Local AI-Powered Execution Assistant
 
 <p align="center">
   <strong>Think. Plan. Execute. Verify. Improve.</strong>
@@ -7,10 +7,9 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Status-Active%20Development-orange?style=for-the-badge" alt="Active Development" />
-  <img src="https://img.shields.io/badge/Platform-Linux-informational?style=for-the-badge&logo=linux&logoColor=white" alt="Linux" />
-  <img src="https://img.shields.io/badge/AI-LLM%20Powered-blueviolet?style=for-the-badge" alt="LLM Powered" />
-  <img src="https://img.shields.io/badge/Architecture-Modular-blue?style=for-the-badge" alt="Modular Architecture" />
+  <img src="assets/jarvis v0.2.png"
+       alt="JARVIS Dashboard"
+       width="900">
 </p>
 
 ---
