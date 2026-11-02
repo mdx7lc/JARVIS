@@ -3,26 +3,33 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="JARVIS Command Center — frontend prototype. Demo data only, no live integrations.">
-<title>JARVIS — Command Center (Demo)</title>
+<meta name="description" content="JARVIS — local AI operator workspace. Server-backed chat, durable goals, and honest configuration.">
+<title>JARVIS — Operator Workspace</title>
 <link rel="stylesheet" href="styles.css">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%2320DDF5' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%2320DDF5'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='13' fill='none' stroke='%2339C5E8' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='5' fill='%2339C5E8'/%3E%3C/svg%3E">
 </head>
 <body>
 
 <svg class="sprite" aria-hidden="true" focusable="false">
   <defs>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11 12 4l8 7"/><path d="M6 10v9h12v-9"/></symbol>
     <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
     <symbol id="i-core" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></symbol>
     <symbol id="i-agents" viewBox="0 0 24 24"><rect x="5" y="7" width="14" height="12" rx="3"/><circle cx="9.5" cy="13" r="1.4"/><circle cx="14.5" cy="13" r="1.4"/><path d="M12 7V4M8 4h8"/></symbol>
     <symbol id="i-tasks" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><path d="M4 5.5l1.3 1.3L7.5 4.6M4 11.5l1.3 1.3 2.2-2.2M4 17.5l1.3 1.3 2.2-2.2"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" class="fill-current"/></symbol>
     <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
     <symbol id="i-memory" viewBox="0 0 24 24"><circle cx="7" cy="7" r="2.4"/><circle cx="17" cy="8" r="2.4"/><circle cx="9" cy="17" r="2.4"/><circle cx="17.5" cy="16.5" r="2"/><path d="M9 8.2l5.7-.4M8 14.8l1-5.3M11.2 16l4.1.3M9.4 8.9l-.2 5.7"/></symbol>
     <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v8a2.5 2.5 0 0 1-2.5 2.5H9l-4.5 4v-4A2.5 2.5 0 0 1 4 14.5z"/></symbol>
     <symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4.5A2.5 2.5 0 0 1 7.5 3H19v15.5H7.5A2.5 2.5 0 0 0 5 21z"/><path d="M5 18.5A2.5 2.5 0 0 1 7.5 16H19"/></symbol>
+    <symbol id="i-vault" viewBox="0 0 24 24"><path d="M4 5.5A1.5 1.5 0 0 1 5.5 4H11a2 2 0 0 1 1 .3l1 .7a2 2 0 0 0 1 .3h4.5A1.5 1.5 0 0 1 20 6.8V18a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M4 9h16"/></symbol>
+    <symbol id="i-graph" viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="7" r="2.4"/><circle cx="12" cy="15" r="2.8"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7.8 7.4 10 12.6M16 8.6l-2.6 4M10.6 16.8l-3.6 1M13.4 16.8l3.6 1"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3.5 6.5A1.5 1.5 0 0 1 5 5h4l2 2.5h8a1.5 1.5 0 0 1 1.5 1.5v9A1.5 1.5 0 0 1 19 19.5H5A1.5 1.5 0 0 1 3.5 18z"/></symbol>
     <symbol id="i-tools" viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 0 0-5.6 5L4 16.4V20h3.6l4.9-4.9a4 4 0 0 0 5-5.6L14.7 12 12 9.3z"/></symbol>
     <symbol id="i-flow" viewBox="0 0 24 24"><rect x="3" y="3.5" width="6" height="6" rx="1.5"/><rect x="15" y="14.5" width="6" height="6" rx="1.5"/><path d="M9 6.5h6a3 3 0 0 1 3 3v5"/></symbol>
     <symbol id="i-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3M9 21h6"/></symbol>
+    <symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13L7.5 14.5H4z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6M18 6.8a7.6 7.6 0 0 1 0 10.4"/></symbol>
+    <symbol id="i-activity" viewBox="0 0 24 24"><path d="M3 12h4l2.5-6 4 12 2.5-6h5"/></symbol>
     <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H13z"/></symbol>
     <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l5 5"/></symbol>
     <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 9.5a6 6 0 0 1 12 0c0 4 1.5 5.5 1.5 5.5h-15S6 13.5 6 9.5"/><path d="M10 19a2 2 0 0 0 4 0"/></symbol>
@@ -31,6 +38,7 @@
     <symbol id="i-focus" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" class="fill-current"/></symbol>
     <symbol id="i-x" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M6 9.5l6 6 6-6"/></symbol>
     <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></symbol>
     <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
     <symbol id="i-send" viewBox="0 0 24 24"><path d="M3.5 11.5 20.5 4l-7 16.5-2.5-7z"/><path d="M11 13.5l9.5-9.5"/></symbol>
@@ -38,77 +46,69 @@
     <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></symbol>
     <symbol id="i-tip" viewBox="0 0 24 24"><path d="M9.5 18h5M10.5 21h3M12 3a6 6 0 0 0-3.4 10.9c.8.6 1 1.4 1 2.1h4c0-.7.2-1.5 1-2.1A6 6 0 0 0 12 3z"/></symbol>
     <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2.8 4.5 6v6c0 5 3.2 8.2 7.5 9.2 4.3-1 7.5-4.2 7.5-9.2V6z"/><path d="M9 12l2.2 2.2L15.5 10"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
     <symbol id="i-code" viewBox="0 0 24 24"><path d="M8 6.5 3.5 12 8 17.5M16 6.5 20.5 12 16 17.5M13.5 4.5l-3 15"/></symbol>
     <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.4 4 5.2 4 8.5s-1.4 6.1-4 8.5c-2.6-2.4-4-5.2-4-8.5s1.4-6.1 4-8.5z"/></symbol>
     <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.5 2"/></symbol>
     <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M6.5 20v-6M11 20v-10M15.5 20v-8M20 20V7"/></symbol>
     <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3 3 8l9 5 9-5z"/><path d="M3 13l9 5 9-5M3 17.5l9 5 9-5" opacity=".55"/></symbol>
     <symbol id="i-brief" viewBox="0 0 24 24"><rect x="3.5" y="8" width="17" height="12" rx="2"/><path d="M9 8V6a3 3 0 0 1 6 0v2M3.5 13h17"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3.5h8L19 8.5v12H6z"/><path d="M13.5 3.5V9H19"/></symbol>
   </defs>
 </svg>
 
 <div class="app" id="app">
 
-  <!-- ============ LEFT NAVIGATION RAIL ============ -->
+  <!-- ============ SIDEBAR ============ -->
   <aside class="rail" id="rail" aria-label="Primary navigation">
     <header class="rail-brand">
       <div class="brand-mark" aria-hidden="true">
         <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" class="ring-outer"/><circle cx="24" cy="24" r="14" class="ring-mid"/><circle cx="24" cy="24" r="5" class="ring-core"/><circle cx="24" cy="4.5" r="2" class="ring-dot"/></svg>
       </div>
       <div class="brand-text">
-        <span class="brand-name">JARVIS</span>
-        <span class="brand-sub">Command Center</span>
+        <span class="brand-name">J.A.R.V.I.S</span>
+        <span class="brand-sub">Operator workspace</span>
       </div>
+      <span class="conn-dot" id="conn-dot" data-state="checking" role="status" aria-label="Server connection"></span>
     </header>
 
     <nav class="rail-nav" aria-label="Sections">
       <button class="nav-item is-active" data-nav="command" aria-current="page">
-        <svg class="ic"><use href="#i-grid"/></svg><span class="nav-label">Command Center</span>
+        <svg class="ic"><use href="#i-home"/></svg><span class="nav-label">Home</span>
       </button>
-      <button class="nav-item" data-nav="ai-core">
-        <svg class="ic"><use href="#i-core"/></svg><span class="nav-label">AI Core</span>
-      </button>
-      <button class="nav-item" data-nav="agents">
-        <svg class="ic"><use href="#i-agents"/></svg><span class="nav-label">Agents</span>
-        <span class="nav-badge">6</span>
-      </button>
-      <button class="nav-item" data-nav="tasks">
-        <svg class="ic"><use href="#i-tasks"/></svg><span class="nav-label">Tasks</span>
-        <span class="nav-badge" id="nav-task-badge">3</span>
-      </button>
-      <button class="nav-item" data-nav="calendar">
-        <svg class="ic"><use href="#i-calendar"/></svg><span class="nav-label">Calendar</span>
-      </button>
-      <button class="nav-item" data-nav="memory">
-        <svg class="ic"><use href="#i-memory"/></svg><span class="nav-label">Memory</span>
+      <button class="nav-item" data-nav="goals">
+        <svg class="ic"><use href="#i-target"/></svg><span class="nav-label">Goals</span>
       </button>
       <button class="nav-item" data-nav="conversations">
         <svg class="ic"><use href="#i-chat"/></svg><span class="nav-label">Conversations</span>
-        <span class="nav-badge">12</span>
+        <span class="nav-badge" id="nav-conv-badge" hidden></span>
       </button>
-      <button class="nav-item" data-nav="knowledge">
-        <svg class="ic"><use href="#i-book"/></svg><span class="nav-label">Knowledge Base</span>
+      <button class="nav-item" data-nav="projects">
+        <svg class="ic"><use href="#i-folder"/></svg><span class="nav-label">Projects</span>
       </button>
+
+      <div class="nav-group">
+        <span class="nav-group-label" id="nav-knowledge-label">Knowledge</span>
+        <button class="nav-item nav-sub" data-nav="obsidian" aria-describedby="nav-knowledge-label">
+          <svg class="ic"><use href="#i-vault"/></svg><span class="nav-label">Obsidian Vault</span>
+        </button>
+        <button class="nav-item nav-sub" data-nav="graph" aria-describedby="nav-knowledge-label">
+          <svg class="ic"><use href="#i-graph"/></svg><span class="nav-label">Knowledge Graph</span>
+        </button>
+      </div>
+
       <button class="nav-item" data-nav="tools">
-        <svg class="ic"><use href="#i-tools"/></svg><span class="nav-label">Tools & Skills</span>
-        <span class="nav-badge">18</span>
+        <svg class="ic"><use href="#i-tools"/></svg><span class="nav-label">Tools</span>
       </button>
-      <button class="nav-item" data-nav="workflows">
-        <svg class="ic"><use href="#i-flow"/></svg><span class="nav-label">Workflows</span>
+      <button class="nav-item" data-nav="settings">
+        <svg class="ic"><use href="#i-settings"/></svg><span class="nav-label">Settings</span>
       </button>
     </nav>
 
     <div class="rail-bottom">
-      <div class="voice-status" id="voice-status">
-        <div class="voice-head">
-          <span class="panel-label">Voice Status</span>
-          <span class="chip chip-demo">Demo</span>
-        </div>
-        <div class="voice-wave" aria-hidden="true">
-          <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-        </div>
-        <p class="voice-note">Not connected — no microphone access in this prototype.</p>
-      </div>
+      <button class="rail-util" id="diag-btn" data-nav="diagnostics">
+        <svg class="ic"><use href="#i-activity"/></svg><span>Diagnostics</span>
+      </button>
       <button class="focus-toggle" id="focus-toggle" aria-pressed="false" role="switch">
         <svg class="ic"><use href="#i-focus"/></svg><span>Focus Mode</span>
         <span class="focus-dot" aria-hidden="true"></span>
@@ -121,249 +121,230 @@
   <!-- ============ MAIN AREA ============ -->
   <div class="main" id="main">
 
-    <!-- Top command bar -->
+    <!-- Top bar -->
     <header class="topbar" role="banner">
       <button class="icon-btn topbar-menu" id="menu-btn" aria-label="Open navigation menu" aria-expanded="false">
         <svg class="ic"><use href="#i-grid"/></svg>
       </button>
-      <div class="status-badge" title="All data in this prototype is simulated">
+      <div class="status-badge" id="sys-status" data-state="checking" title="Live status fetched from GET /api/status">
         <span class="pulse-dot" aria-hidden="true"></span>
-        System Status · Demo Mode
+        <span id="sys-status-text">Checking</span>
       </div>
-      <div class="clock" aria-label="Current local time">
-        <time id="clock-date" datetime="">--</time>
-        <span class="clock-time" id="clock-time">--:--:--</span>
+      <div class="topbar-model" id="topbar-model" hidden>
+        <svg class="ic"><use href="#i-core"/></svg>
+        <span id="topbar-model-text" title="Effective model policy (configuration, not proof of verified inference)"></span>
       </div>
       <div class="topbar-search">
         <svg class="ic"><use href="#i-search"/></svg>
-        <input type="search" id="search" placeholder="Search demo content…" aria-label="Search demo content" autocomplete="off">
+        <input type="search" id="search" placeholder="Search tasks, chats, messages…" aria-label="Search server records" autocomplete="off">
         <kbd class="search-hint" aria-hidden="true">/</kbd>
+        <div class="search-results" id="search-results" hidden></div>
       </div>
       <div class="topbar-actions">
         <button class="icon-btn" id="layout-btn" aria-label="Cycle layout density" title="Layout density">
           <svg class="ic"><use href="#i-layers"/></svg>
         </button>
-        <button class="icon-btn has-dot" id="notif-btn" aria-label="Open notifications" aria-haspopup="dialog">
-          <svg class="ic"><use href="#i-bell"/></svg>
+        <button class="icon-btn" id="notif-btn" aria-label="Open notifications" aria-haspopup="dialog">
+          <svg class="ic"><use href="#i-bell"/></svg><span class="notif-badge" id="notif-badge" hidden></span>
         </button>
-        <button class="icon-btn" id="settings-btn" aria-label="Open settings information" aria-haspopup="dialog">
+        <button class="icon-btn" id="settings-btn" aria-label="Open settings" aria-haspopup="dialog">
           <svg class="ic"><use href="#i-settings"/></svg>
-        </button>
-        <button class="operator" id="operator-btn" aria-label="Operator profile (demo)">
-          <span class="operator-meta"><span>Operator</span><span class="operator-role">Commander</span></span>
-          <span class="operator-avatar" aria-hidden="true"><svg class="ic"><use href="#i-user"/></svg></span>
         </button>
       </div>
     </header>
 
-    <!-- Command Center view -->
-    <main class="view view-command is-visible" id="view-command" tabindex="-1">
-      <div class="cc-grid">
+    <!-- ============ HOME WORKSPACE ============ -->
+    <main class="view view-home is-visible" id="view-command" tabindex="-1" aria-label="Home workspace">
+      <div class="home-grid">
 
-        <!-- Row 1 : overview | hero | feed -->
-        <section class="panel panel-overview" aria-labelledby="h-overview">
-          <header class="panel-head">
-            <h2 class="panel-title" id="h-overview">AI Core Overview</h2>
-            <span class="chip chip-demo">Demo mode</span>
-          </header>
-          <ul class="overview-list" id="overview-list"></ul>
-        </section>
-
-        <section class="panel panel-hero" aria-labelledby="h-hero" data-searchable name="AI Core">
-          <div class="orbital" id="orbital">
-            <svg class="orbital-svg" viewBox="0 0 900 640" role="img" aria-label="JARVIS AI Core orbital visualization (decorative demo)">
-              <defs>
-                <radialGradient id="o-glow" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="#20DDF5" stop-opacity=".16"/>
-                  <stop offset="60%" stop-color="#20DDF5" stop-opacity=".05"/>
-                  <stop offset="100%" stop-color="#20DDF5" stop-opacity="0"/>
-                </radialGradient>
-                <radialGradient id="o-core" cx="50%" cy="38%" r="70%">
-                  <stop offset="0%" stop-color="#164B63"/>
-                  <stop offset="60%" stop-color="#0B2A3E"/>
-                  <stop offset="100%" stop-color="#071B29"/>
-                </radialGradient>
-                <linearGradient id="o-ring" x1="0" y1="0" x2="1" y2="0">
-                  <stop offset="0%" stop-color="#20DDF5" stop-opacity="0"/>
-                  <stop offset="50%" stop-color="#20DDF5" stop-opacity=".85"/>
-                  <stop offset="100%" stop-color="#20DDF5" stop-opacity="0"/>
-                </linearGradient>
-              </defs>
-
-              <ellipse cx="450" cy="320" rx="430" ry="300" fill="url(#o-glow)"/>
-
-              <!--<base sphere : wire mesh lat/long lines -->
-              <g class="o-mesh" transform="translate(450 320)">
-                <!-- latitude ellipses -->
-                <ellipse rx="195" ry="195" class="mesh"/>
-                <ellipse rx="195" ry="150" class="mesh"/>
-                <ellipse rx="195" ry="100" class="mesh"/>
-                <ellipse rx="195" ry="48" class="mesh"/>
-                <!-- longitude ellipses (rotated) -->
-                <g class="mesh-lon">
-                  <ellipse rx="46" ry="195" class="mesh"/>
-                  <ellipse rx="100" ry="195" class="mesh"/>
-                  <ellipse rx="150" ry="195" class="mesh"/>
-                  <ellipse rx="195" ry="195" class="mesh"/>
-                </g>
-              </g>
-
-              <!-- orbital rings, deliberately inclined (luminous dots attached by app.js) -->
-              <g class="o-orbits" transform="translate(450 320)">
-                <g transform="rotate(-16)">
-                  <ellipse rx="300" ry="96" class="orbit-path"/>
-                </g>
-                <g transform="rotate(24)">
-                  <ellipse rx="252" ry="168" class="orbit-path"/>
-                </g>
-                <g transform="rotate(9)">
-                  <ellipse rx="345" ry="72" class="orbit-path"/>
-                </g>
-              </g>
-
-              <!-- network constellation nodes (filled by JS) -->
-              <g id="o-links"></g>
-              <g id="o-nodes"></g>
-              <g id="o-orbiters" transform="translate(450 320)"></g>
-
-              <!-- center -->
-              <g transform="translate(450 320)">
-                <circle r="132" class="o-core-disc" fill="url(#o-core)"/>
-                <circle r="132" class="o-core-ring"/>
-                <circle r="118" class="o-core-ring o-core-ring-inner"/>
-                <circle r="140" class="o-core-halo"/>
-                <text y="-30" class="o-word">JARVIS</text>
-                <text y="4" class="o-sub">AI CORE</text>
-                <g class="o-version"><text y="34" class="o-ver-text">v3.0.0</text></g>
-              </g>
-            </svg>
-            <p class="orbital-caption">Prototype visualization — components represented in demo mode only</p>
+        <section class="panel panel-hero" aria-label="JARVIS core">
+          <div class="core-orb is-idle" id="core-orb" role="img" aria-label="JARVIS core — idle">
+            <span class="orb-glow" aria-hidden="true"></span>
+            <span class="orb-ring orb-ring-1" aria-hidden="true"></span>
+            <span class="orb-ring orb-ring-2" aria-hidden="true"></span>
+            <span class="orb-ring orb-ring-3" aria-hidden="true"></span>
+            <span class="orb-sweep" aria-hidden="true"></span>
+            <span class="orb-electron orb-e1" aria-hidden="true"></span>
+            <span class="orb-electron orb-e2" aria-hidden="true"></span>
+            <span class="orb-electron orb-e3" aria-hidden="true"></span>
+            <div class="orb-core">
+              <span class="orb-wordmark">J.A.R.V.I.S</span>
+              <span class="orb-state" id="core-state-text">Idle</span>
+            </div>
+          </div>
+          <p class="orb-note" id="core-state-note">All clear — no active operations.</p>
+          <div class="orb-actions">
+            <button class="btn btn-primary" id="home-new-goal">
+              <svg class="ic ic-xs"><use href="#i-plus"/></svg> New goal
+            </button>
+            <button class="btn" id="home-open-chat">
+              <svg class="ic ic-xs"><use href="#i-chat"/></svg> Open conversation
+            </button>
           </div>
         </section>
 
-        <section class="panel panel-feed" aria-labelledby="h-feed">
-          <header class="panel-head">
-            <h2 class="panel-title" id="h-feed">Live Intelligence Feed</h2>
-            <span class="chip chip-live"><span class="pulse-dot" aria-hidden="true"></span>Live · Demo</span>
-          </header>
-          <ul class="feed-list" id="feed-list" aria-live="polite"></ul>
-          <button class="panel-more" id="feed-more">View All Intelligence <svg class="ic ic-xs"><use href="#i-arrow"/></svg></button>
-        </section>
+        <div class="home-side">
+          <section class="panel" aria-labelledby="h-active-goal" id="home-active-goal-panel">
+            <header class="panel-head">
+              <h2 class="panel-title" id="h-active-goal">Active goal</h2>
+              <span id="home-active-goal-chip"></span>
+            </header>
+            <div id="home-active-goal"></div>
+          </section>
 
-        <!-- Row 2 : agents | timeline | quick commands -->
-        <section class="panel panel-agents" aria-labelledby="h-agents">
-          <header class="panel-head">
-            <h2 class="panel-title" id="h-agents">Active Agents</h2>
-            <button class="panel-link" id="agents-viewall">View All</button>
-          </header>
-          <div class="agent-grid" id="agent-grid"></div>
-        </section>
+          <section class="panel" aria-labelledby="h-recent-goals">
+            <header class="panel-head">
+              <h2 class="panel-title" id="h-recent-goals">Recent goals</h2>
+              <button class="panel-link" id="home-goals-all">Open Goals</button>
+            </header>
+            <ol class="home-goal-list" id="home-recent-goals"></ol>
+          </section>
 
-        <section class="panel panel-timeline" aria-labelledby="h-timeline">
+          <section class="panel" aria-labelledby="h-activity">
+            <header class="panel-head">
+              <h2 class="panel-title" id="h-activity">Current activity</h2>
+              <span class="chip chip-off" id="activity-chip">idle</span>
+            </header>
+            <ul class="activity-list" id="home-activity"></ul>
+          </section>
+        </div>
+
+        <section class="panel panel-tasks" aria-labelledby="h-tasks">
           <header class="panel-head">
-            <h2 class="panel-title" id="h-timeline">Mission Timeline</h2>
-            <div class="seg" role="tablist" aria-label="Timeline day filter">
+            <h2 class="panel-title" id="h-tasks">Tasks</h2>
+            <div class="seg" role="tablist" aria-label="Task day filter">
               <button class="seg-btn is-active" role="tab" aria-selected="true" data-day="today">Today</button>
               <button class="seg-btn" role="tab" aria-selected="false" data-day="tomorrow">Tomorrow</button>
             </div>
+            <button class="panel-link" id="task-new-btn"><svg class="ic ic-xs"><use href="#i-plus"/></svg> New task</button>
           </header>
           <ol class="timeline" id="timeline"></ol>
-          <button class="panel-more" id="timeline-more">View Full Schedule <svg class="ic ic-xs"><use href="#i-arrow"/></svg></button>
-        </section>
-
-        <section class="panel panel-quick" aria-labelledby="h-quick">
-          <header class="panel-head">
-            <h2 class="panel-title" id="h-quick">Quick Commands</h2>
-          </header>
-          <div class="quick-list">
-            <button class="quick-btn" id="qc-task"><svg class="ic"><use href="#i-plus"/></svg><span>Start New Task</span></button>
-            <button class="quick-btn" id="qc-calendar"><svg class="ic"><use href="#i-calendar"/></svg><span>Open Calendar</span></button>
-            <button class="quick-btn" id="qc-voice"><svg class="ic"><use href="#i-mic"/></svg><span>Start Voice Chat</span></button>
-            <button class="quick-btn" id="qc-workflow"><svg class="ic"><use href="#i-play"/></svg><span>Run Workflow</span></button>
-          </div>
-        </section>
-
-        <!-- Row 3 : monitor | memory | llm -->
-        <section class="panel panel-monitor" aria-labelledby="h-monitor">
-          <header class="panel-head">
-            <h2 class="panel-title" id="h-monitor">System Monitor</h2>
-            <span class="chip chip-demo">Demo data</span>
-          </header>
-          <div class="gauges" id="gauges"></div>
-        </section>
-
-        <section class="panel panel-memory" aria-labelledby="h-memory">
-          <header class="panel-head">
-            <h2 class="panel-title" id="h-memory">Memory Insights</h2>
-            <span class="chip chip-demo">Placeholder</span>
-          </header>
-          <div class="memory-body">
-            <svg class="memory-net" id="memory-net" viewBox="0 0 220 120" aria-hidden="true"></svg>
-            <dl class="memory-stats">
-              <div><dt>Memories</dt><dd id="m-mem">3,180</dd></div>
-              <div><dt>Session turns</dt><dd id="m-turns">22</dd></div>
-              <div><dt>Tool calls</dt><dd id="m-calls">14</dd></div>
-            </dl>
-            <button class="panel-link panel-link-wide" id="memory-map">View Memory Map <svg class="ic ic-xs"><use href="#i-arrow"/></svg></button>
-          </div>
-        </section>
-
-        <section class="panel panel-llm" aria-labelledby="h-llm">
-          <header class="panel-head">
-            <h2 class="panel-title" id="h-llm">LLM & Integrations</h2>
-            <span class="chip chip-disc">◆ Demo</span>
-          </header>
-          <div class="llm-grid" id="llm-grid"></div>
-          <button class="panel-more" id="llm-manage">Manage Providers <svg class="ic ic-xs"><use href="#i-arrow"/></svg></button>
         </section>
 
       </div>
     </main>
 
-    <!-- Generic secondary view (frontend preview only) -->
-    <section class="view view-secondary" id="view-secondary" tabindex="-1" hidden>
-      <div class="preview-card panel">
-        <header class="panel-head">
-          <h2 class="panel-title" id="sec-title">Section</h2>
-          <span class="chip chip-demo">Frontend preview only</span>
+    <!-- ============ PROJECTS VIEW (honest) ============ -->
+    <section class="view view-page" id="view-projects" tabindex="-1" hidden aria-label="Projects">
+      <div class="page-wrap">
+        <header class="page-head">
+          <h1 class="page-title">Projects</h1>
+          <p class="page-note">A project workspace is not implemented yet. JARVIS currently operates on one workspace root; durable goals and tasks are the working units.</p>
         </header>
-        <div class="preview-body">
-          <svg class="preview-art" viewBox="0 0 120 72" aria-hidden="true">
-            <circle cx="60" cy="36" r="30" class="preview-ring"/>
-            <circle cx="60" cy="36" r="18" class="preview-ring preview-ring-2"/>
-            <circle cx="60" cy="36" r="4" class="preview-core"/>
-          </svg>
-          <p class="preview-title" id="sec-name">—</p>
-          <p class="preview-desc" id="sec-desc">This section is reserved for future system modules. The Command Center is the only interactive view in this prototype.</p>
-          <button class="btn" id="sec-back"><svg class="ic ic-xs"><use href="#i-arrow"/></svg> Back to Command Center</button>
-        </div>
+        <section class="panel">
+          <h2 class="page-sub">What exists today</h2>
+          <ul class="page-list" id="projects-facts"></ul>
+          <p class="page-note">Grouping goals and tasks into named projects needs a backend data model (project records + membership), which is out of scope for this phase. Nothing here is simulated.</p>
+        </section>
       </div>
     </section>
 
-    <!-- Bottom command dock -->
+    <!-- ============ OBSIDIAN VAULT VIEW (honest setup state) ============ -->
+    <section class="view view-page" id="view-obsidian" tabindex="-1" hidden aria-label="Obsidian Vault">
+      <div class="page-wrap">
+        <header class="page-head">
+          <h1 class="page-title">Obsidian Vault</h1>
+          <span class="chip chip-off">Not connected</span>
+        </header>
+        <section class="panel empty-state">
+          <svg class="empty-art" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-vault"/></svg>
+          <h2 class="page-sub">No vault is configured</h2>
+          <p class="page-note">JARVIS does not read, index, or sync any Obsidian vault in this build. When a backend vault index exists (configured vault path, a read-only note index, and a search endpoint), this view will list real folders and notes here — never sample content.</p>
+          <ul class="page-list">
+            <li>Required: a configured vault location exposed by the server (read-only).</li>
+            <li>Required: a note index endpoint (folder tree + note list + note content).</li>
+            <li>Required: bounded search over indexed notes.</li>
+          </ul>
+          <p class="page-note">This is planned backend integration work (see the roadmap); this view intentionally shows a setup state instead of a fake vault.</p>
+        </section>
+      </div>
+    </section>
+
+    <!-- ============ KNOWLEDGE GRAPH VIEW (honest setup state) ============ -->
+    <section class="view view-page" id="view-graph" tabindex="-1" hidden aria-label="Knowledge Graph">
+      <div class="page-wrap">
+        <header class="page-head">
+          <h1 class="page-title">Knowledge Graph</h1>
+          <span class="chip chip-off">Not connected</span>
+        </header>
+        <section class="panel empty-state">
+          <svg class="empty-art" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-graph"/></svg>
+          <h2 class="page-sub">No graph index exists</h2>
+          <p class="page-note">A knowledge graph needs real relationships between real notes (links, backlinks, or explicit connections) produced by a backend indexer. JARVIS has no vault index yet, so there is nothing truthful to draw — this view stays empty rather than rendering invented nodes.</p>
+          <ul class="page-list">
+            <li>Required: an indexed note store (see Obsidian Vault).</li>
+            <li>Required: a relations endpoint (nodes + edges derived from real links).</li>
+            <li>Then: an SVG force/cluster layout with zoom, pan, fit, and node inspection.</li>
+          </ul>
+          <p class="page-note">The graph view will activate automatically once the backend provides real data. No vector database is part of this phase.</p>
+        </section>
+      </div>
+    </section>
+
+    <!-- ============ TOOLS VIEW (honest capability summary) ============ -->
+    <section class="view view-page" id="view-tools" tabindex="-1" hidden aria-label="Tools">
+      <div class="page-wrap">
+        <header class="page-head">
+          <h1 class="page-title">Tools &amp; capabilities</h1>
+          <p class="page-note">What the goal orchestrator can actually execute today. Every tool is registered server-side with a typed schema, a permission level, and a verifier — the model cannot grant itself new powers.</p>
+        </header>
+        <section class="panel">
+          <h2 class="page-sub">Registered workspace tools</h2>
+          <ul class="page-list" id="tools-list"></ul>
+        </section>
+        <section class="panel">
+          <h2 class="page-sub">Human control points</h2>
+          <ul class="page-list">
+            <li>Write operations require a digest-bound human approval before anything is executed.</li>
+            <li>Plan execution is gated by an independent review when a reviewer is configured; without one, review is recorded honestly as unavailable.</li>
+            <li>Verification recipes (syntax checks, project tests, diff inspection) run in bounded child processes; nothing else is spawnable.</li>
+          </ul>
+        </section>
+      </div>
+    </section>
+
+    <!-- ============ DIAGNOSTICS VIEW (real local telemetry) ============ -->
+    <section class="view view-page" id="view-diagnostics" tabindex="-1" hidden aria-label="Diagnostics">
+      <div class="page-wrap">
+        <header class="page-head">
+          <h1 class="page-title">Diagnostics</h1>
+          <span class="chip chip-inline" id="h-monitor-chip" data-state="sampling">Local · sampling</span>
+        </header>
+        <section class="panel" aria-label="Local system telemetry">
+          <h2 class="page-sub">Local system</h2>
+          <div class="gauges" id="gauges"></div>
+          <p class="page-note" id="diag-note"></p>
+        </section>
+        <section class="panel" aria-label="Application status">
+          <h2 class="page-sub">Application</h2>
+          <ul class="page-list" id="diag-status"></ul>
+        </section>
+        <section class="panel" aria-label="Executive briefing">
+          <h2 class="page-sub">Executive briefing</h2>
+          <p class="page-note">A compiled summary from live application data — status, telemetry, saved tasks. Not AI-generated.</p>
+          <button class="btn" id="brief-btn">
+            <svg class="ic ic-xs"><use href="#i-brief"/></svg> Open briefing
+          </button>
+        </section>
+        <section class="panel" aria-label="Updates">
+          <h2 class="page-sub">Updates</h2>
+          <p class="page-note">CHECK and REPORT by default; a verified staged install is a separate explicit, digest-bound operator action (see the roadmap for the operator flow). Nothing is ever installed automatically.</p>
+          <ul class="page-list" id="diag-updates"></ul>
+          <button class="btn" id="updates-check-btn">Check now</button>
+        </section>
+        <section class="panel" aria-label="Self-improvement">
+          <h2 class="page-sub">Self-improvement</h2>
+          <p class="page-note">Evidence from real activity aggregates becomes an improvement proposal; you decide, and approved proposals become follow-up tasks. No automatic code or policy changes — ever.</p>
+          <ul class="page-list" id="diag-improvements"></ul>
+          <div class="key-row">
+            <button class="btn" id="improvements-scan-btn">Scan for improvements</button>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- Composer -->
     <footer class="dock" role="contentinfo">
-      <div class="dock-widgets" id="dock-widgets">
-        <div class="dock-widget">
-          <span class="dock-label">Location</span>
-          <span class="dock-value">Local System</span>
-          <span class="chip chip-demo">Demo</span>
-        </div>
-        <div class="dock-widget">
-          <span class="dock-label">Weather</span>
-          <span class="dock-value">22°C Overcast</span>
-          <span class="chip chip-demo">Demo</span>
-        </div>
-        <div class="dock-widget">
-          <span class="dock-label">Network</span>
-          <span class="dock-value">Local · Good</span>
-          <span class="chip chip-demo">Demo</span>
-        </div>
-      </div>
-
-      <div class="dock-dots" aria-hidden="true">
-        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-      </div>
-
       <div class="dock-prompt">
         <div class="prompt-core" aria-hidden="true">
           <svg viewBox="0 0 48 48" class="pulse-puck">
@@ -372,19 +353,28 @@
           </svg>
         </div>
         <div class="prompt-body">
-          <p class="prompt-title" id="prompt-title">Talk to JARVIS <span class="chip chip-demo chip-inline">Demo mode</span></p>
           <form class="prompt-form" id="chat-form" autocomplete="off">
-            <input type="text" id="chat-input" placeholder="Ask JARVIS anything — responses are simulated in this prototype" aria-label="Message JARVIS (demo)">
+            <span class="voice-controls">
+              <button type="button" class="prompt-send voice-btn" id="voice-mic" aria-label="Start voice input" title="Voice input">
+                <svg class="ic"><use href="#i-mic"/></svg>
+              </button>
+              <select class="voice-lang" id="voice-lang" aria-label="Voice recognition language" title="Voice recognition language">
+                <option value="en-US">EN</option>
+                <option value="fr-FR">FR</option>
+                <option value="ar">AR</option>
+              </select>
+              <button type="button" class="prompt-send voice-btn" id="voice-speak" aria-pressed="false" aria-label="Speak replies: off" title="Speak replies">
+                <svg class="ic"><use href="#i-sound"/></svg>
+              </button>
+            </span>
+            <input type="text" id="chat-input" placeholder="Message JARVIS" aria-label="Message JARVIS">
             <button type="submit" class="prompt-send" aria-label="Send message">
               <svg class="ic"><use href="#i-send"/></svg>
             </button>
           </form>
+          <p class="voice-status" id="voice-status" aria-live="polite"></p>
         </div>
       </div>
-
-      <button class="dock-brief" id="brief-btn">
-        <svg class="ic"><use href="#i-brief"/></svg><span>Executive Briefing</span>
-      </button>
     </footer>
   </div>
 </div>
@@ -394,55 +384,22 @@
 <!-- Notification panel -->
 <section class="pop" id="pop-notif" role="dialog" aria-modal="false" aria-labelledby="notif-title" hidden>
   <header class="pop-head">
-    <h2 class="pop-title" id="notif-title">Notifications</h2>
+    <h2 class="pop-title" id="notif-title">Notifications <span class="chip chip-inline">Session only</span></h2>
+    <button class="pop-clear" id="notif-clear" type="button">Clear</button>
     <button class="icon-btn pop-close" data-close="pop-notif" aria-label="Close notifications"><svg class="ic"><use href="#i-x"/></svg></button>
   </header>
+  <p class="pop-note">Session events only — the list resets on reload. Server-persisted history lives in Goals, Tasks and Conversations.</p>
   <ul class="notif-list" id="notif-list"></ul>
-</section>
-
-<!-- Settings panel -->
-<section class="pop" id="pop-settings" role="dialog" aria-modal="false" aria-labelledby="settings-title" hidden>
-  <header class="pop-head">
-    <h2 class="pop-title" id="settings-title">Settings</h2>
-    <button class="icon-btn pop-close" data-close="pop-settings" aria-label="Close settings"><svg class="ic"><use href="#i-x"/></svg></button>
-  </header>
-  <div class="pop-body">
-    <p class="pop-note"><strong>Prototype notice.</strong> Settings are not wired to any system. The options below are presentation-only concepts for the future JARVIS build.</p>
-    <ul class="settings-list">
-      <li><svg class="ic"><use href="#i-shield"/></svg><div><strong>Privacy core</strong><span>Local-first memory storage is planned, not active.</span></div></li>
-      <li><svg class="ic"><use href="#i-mic"/></svg><div><strong>Voice I/O</strong><span>Microphone capture is not implemented in this prototype.</span></div></li>
-      <li><svg class="ic"><use href="#i-zap"/></svg><div><strong>Providers</strong><span>Model routing is configured outside the frontend task.</span></div></li>
-      <li><svg class="ic"><use href="#i-focus"/></svg><div><strong>Focus Mode</strong><span>Currently dims secondary panels in this layout only.</span></div></li>
-    </ul>
-  </div>
-</section>
-
-<!-- Operator panel -->
-<section class="pop" id="pop-operator" role="dialog" aria-modal="false" aria-labelledby="op-title" hidden>
-  <header class="pop-head">
-    <h2 class="pop-title" id="op-title">Operator</h2>
-    <button class="icon-btn pop-close" data-close="pop-operator" aria-label="Close operator panel"><svg class="ic"><use href="#i-x"/></svg></button>
-  </header>
-  <div class="pop-body op-body">
-    <div class="op-id">
-      <span class="op-avatar"><svg class="ic"><use href="#i-user"/></svg></span>
-      <div><strong>Commander</strong><span>Local demo profile — no account backend.</span></div>
-    </div>
-    <ul class="settings-list">
-      <li><svg class="ic"><use href="#i-shield"/></svg><div><strong>Clearance</strong><span>Demonstration tier. Elevated roles are a scope of the real system.</span></div></li>
-      <li><svg class="ic"><use href="#i-clock"/></svg><div><strong>Session</strong><span>Prototype session only — history is stored in memory and resets on reload.</span></div></li>
-    </ul>
-  </div>
 </section>
 
 <!-- Layout panel -->
 <section class="pop" id="pop-layout" role="dialog" aria-modal="false" aria-labelledby="layout-title" hidden>
   <header class="pop-head">
-    <h2 class="pop-title" id="layout-title">Layout Density</h2>
+    <h2 class="pop-title" id="layout-title">Layout density</h2>
     <button class="icon-btn pop-close" data-close="pop-layout" aria-label="Close layout panel"><svg class="ic"><use href="#i-x"/></svg></button>
   </header>
   <div class="pop-body">
-    <p class="pop-note">Switch the dashboard spacing. This is a presentation toggle only — it changes nothing outside the page.</p>
+    <p class="pop-note">A presentation toggle only — it changes nothing outside this page.</p>
     <div class="seg seg-wide" role="tablist" aria-label="Layout density">
       <button class="seg-btn is-active" role="tab" aria-selected="true" data-density="cozy">Cozy</button>
       <button class="seg-btn" role="tab" aria-selected="false" data-density="compact">Compact</button>
@@ -454,10 +411,10 @@
 <dialog class="modal" id="modal-task" aria-labelledby="task-title">
   <form method="dialog" class="modal-form" id="task-form">
     <header class="modal-head">
-      <h2 class="modal-title" id="task-title">Start New Task</h2>
+      <h2 class="modal-title" id="task-title">New task</h2>
       <button type="button" class="icon-btn pop-close" id="task-close" aria-label="Close task form"><svg class="ic"><use href="#i-x"/></svg></button>
     </header>
-    <p class="modal-note">Demo task — stored in page memory, resets on reload. No calendar or task backend is connected.</p>
+    <p class="modal-note">Tasks are saved on the local JARVIS server and survive reloads. The tasks panel shows saved records — it does not schedule or execute anything.</p>
     <label class="field">
       <span class="field-label">Task title</span>
       <input type="text" id="task-title-input" name="title" required maxlength="80" placeholder="e.g. Draft launch checklist">
@@ -481,26 +438,38 @@
   </form>
 </dialog>
 
-<!-- Agent detail modal -->
-<dialog class="modal" id="modal-agent" aria-labelledby="agent-title">
-  <header class="modal-head">
-    <h2 class="modal-title" id="agent-title">Agent</h2>
-    <button type="button" class="icon-btn pop-close" data-close-modal="modal-agent" aria-label="Close agent details"><svg class="ic"><use href="#i-x"/></svg></button>
-  </header>
-  <div class="modal-body" id="agent-body"></div>
-</dialog>
-
 <!-- Conversation modal (chat) -->
 <dialog class="modal modal-chat" id="modal-chat" aria-labelledby="chat-title">
   <header class="modal-head">
-    <h2 class="modal-title" id="chat-title">Conversation <span class="chip chip-demo chip-inline">UI-only · demo</span></h2>
-    <button type="button" class="icon-btn pop-close" id="chat-close" aria-label="Close conversation"><svg class="ic"><use href="#i-x"/></svg></button>
+    <h2 class="modal-title" id="chat-title">Conversation <span class="chip chip-live chip-inline"><span class="pulse-dot" aria-hidden="true"></span>Local model</span></h2>
+    <div class="chat-actions">
+      <button type="button" class="icon-btn" id="chat-history" aria-label="Toggle saved conversation history" aria-expanded="false" title="Conversation history"><svg class="ic"><use href="#i-clock"/></svg></button>
+      <button type="button" class="icon-btn" id="chat-new" aria-label="Start a new conversation" title="New conversation"><svg class="ic"><use href="#i-plus"/></svg></button>
+      <button type="button" class="icon-btn pop-close" id="chat-close" aria-label="Close conversation"><svg class="ic"><use href="#i-x"/></svg></button>
+    </div>
   </header>
+  <div class="conv-panel" id="conv-panel" hidden>
+    <ul class="conv-list" id="conv-list"></ul>
+  </div>
   <div class="chat-log" id="chat-log" aria-live="polite"></div>
   <form class="chat-entry" id="chat-form-modal" autocomplete="off">
-    <input type="text" id="chat-input-modal" placeholder="Message JARVIS (simulated)" aria-label="Message JARVIS in conversation panel (demo)">
+    <span class="voice-controls">
+      <button type="button" class="prompt-send voice-btn" id="voice-mic-modal" aria-label="Start voice input" title="Voice input">
+        <svg class="ic"><use href="#i-mic"/></svg>
+      </button>
+      <select class="voice-lang" id="voice-lang-modal" aria-label="Voice recognition language" title="Voice recognition language">
+        <option value="en-US">EN</option>
+        <option value="fr-FR">FR</option>
+        <option value="ar">AR</option>
+      </select>
+      <button type="button" class="prompt-send voice-btn" id="voice-speak-modal" aria-pressed="false" aria-label="Speak replies: off" title="Speak replies">
+        <svg class="ic"><use href="#i-sound"/></svg>
+      </button>
+    </span>
+    <input type="text" id="chat-input-modal" placeholder="Message JARVIS" aria-label="Message JARVIS in conversation panel">
     <button type="submit" class="btn btn-primary"><svg class="ic ic-xs"><use href="#i-send"/></svg> Send</button>
   </form>
+  <p class="voice-status" id="voice-status-modal" aria-live="polite"></p>
 </dialog>
 
 <!-- Generic info modal -->
@@ -512,26 +481,211 @@
   <div class="modal-body" id="info-body"></div>
 </dialog>
 
+<!-- Phase 7A model management modal -->
+<dialog class="modal" id="modal-models" aria-labelledby="models-title">
+  <header class="modal-head">
+    <h2 class="modal-title" id="models-title">Model Management</h2>
+    <button type="button" class="icon-btn pop-close" data-close-modal="modal-models" aria-label="Close model management"><svg class="ic"><use href="#i-x"/></svg></button>
+  </header>
+  <div class="modal-body" id="models-body">
+    <p class="modal-note" id="models-note">Model policy comes from the server. A model being listed in the catalog is configuration, not proof of verified inference — every chat reply is what proves a model worked.</p>
+    <div class="models-toolbar">
+      <input type="search" id="models-filter" placeholder="Filter models…" aria-label="Filter model list" autocomplete="off">
+      <button type="button" class="btn" id="models-refresh">Refresh catalog</button>
+    </div>
+    <p class="models-error" id="models-error" hidden></p>
+    <ol class="model-list" id="models-list" aria-label="Available models"></ol>
+    <div class="models-actions">
+      <button type="button" class="btn" id="models-clear">Back to environment default</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- Settings Center (Phase 11A: server-backed, persisted, secret-free) -->
+<dialog class="modal" id="modal-settings" aria-labelledby="settings-ext-title">
+  <header class="modal-head">
+    <h2 class="modal-title" id="settings-ext-title">Settings Center</h2>
+    <button type="button" class="icon-btn pop-close" data-close-modal="modal-settings" aria-label="Close settings"><svg class="ic"><use href="#i-x"/></svg></button>
+  </header>
+  <div class="modal-body settings-body">
+    <p class="modal-note">Settings persist in the server's user configuration store. API keys are write-only: they can be saved or cleared, but never read back or displayed.</p>
+    <div class="seg seg-wide" id="settings-tabs" role="tablist" aria-label="Settings sections">
+      <button type="button" class="seg-btn is-active" role="tab" aria-selected="true" data-tab="provider">Provider</button>
+      <button type="button" class="seg-btn" role="tab" aria-selected="false" data-tab="model">Model routing</button>
+      <button type="button" class="seg-btn" role="tab" aria-selected="false" data-tab="runtime">Application</button>
+      <button type="button" class="seg-btn" role="tab" aria-selected="false" data-tab="knowledge">Knowledge</button>
+      <button type="button" class="seg-btn" role="tab" aria-selected="false" data-tab="permissions">Permissions</button>
+      <button type="button" class="seg-btn" role="tab" aria-selected="false" data-tab="skills">Skills</button>
+    </div>
+    <p class="models-error" id="settings-error" hidden></p>
+
+    <section class="settings-tab" id="settings-knowledge-tab" aria-label="Obsidian vault knowledge" hidden>
+      <label class="field">
+        <span class="field-label">Obsidian vault folder (absolute path)</span>
+        <input type="text" id="settings-vault-input" maxlength="512" autocomplete="off" placeholder="e.g. /home/you/Documents/JARVIS-Vault">
+        <span class="field-hint">An existing folder with Markdown notes. JARVIS reads it read-only; notes are never modified. Stored locally, never agent-controlled.</span>
+      </label>
+      <div class="models-actions">
+        <button type="button" class="btn btn-primary" id="settings-vault-save">Set vault folder</button>
+        <button type="button" class="btn" id="settings-vault-clear">Disconnect</button>
+        <button type="button" class="btn" id="settings-vault-refresh">Refresh index</button>
+      </div>
+      <p class="field-hint" id="settings-vault-status"></p>
+      <p class="modal-note" id="settings-vault-index-note" hidden></p>
+    </section>
+
+    <section class="settings-tab" id="settings-skills-tab" aria-label="Skills registry" hidden>
+      <p class="modal-note">JARVIS discovers local skills (a folder containing a <code>SKILL.md</code> manifest) from the configured directories — never from the network. Skills are trusted or enabled here by the operator. A skill with an <code>entrypoint</code> in its manifest can be executed — but only on this explicit operator action, only when trusted AND enabled, and only inside a bubblewrap sandbox (network unshared, isolated workspace, timeout, no credentials). No sandbox on this machine ⇒ execution fails closed.</p>
+      <p class="field-hint" id="skills-dirs-note"></p>
+      <div class="field">
+        <span class="field-label">Discovered skills</span>
+        <ul class="provider-list" id="skills-list"></ul>
+        <p class="field-hint" id="skills-state-note">Loading skills…</p>
+      </div>
+      <div class="field" id="skills-run-section" hidden>
+        <span class="field-label">Execute a skill (sandboxed)</span>
+        <p class="field-hint" id="skills-exec-note"></p>
+        <label class="field">
+          <span class="field-label">Skill id</span>
+          <input type="text" id="skill-run-id" maxlength="80" autocomplete="off" placeholder="exact skill id from the list above">
+        </label>
+        <label class="field">
+          <span class="field-label">Arguments (JSON object, optional; secret-named values are redacted from the record)</span>
+          <input type="text" id="skill-run-args" maxlength="2000" autocomplete="off" placeholder='{"name": "value"}'>
+        </label>
+        <div class="models-actions">
+          <button type="button" class="btn btn-primary" id="skill-run-btn">Run in sandbox</button>
+        </div>
+        <p class="field-hint" id="skill-run-note"></p>
+      </div>
+      <div class="field">
+        <span class="field-label">Execution history (real runs and refusals)</span>
+        <ul class="provider-list" id="skill-runs"></ul>
+      </div>
+    </section>
+
+    <section class="settings-tab" id="settings-permissions-tab" aria-label="Permission engine" hidden>
+      <p class="modal-note">The backend permission engine authorizes every tool call. Four levels: L1 Observer (read, auto-authorized), L2 Operator (low-risk ops, auto-authorized), L3 Authorized executor (consequential, exact digest-bound approval), L4 Restricted (never grantable).</p>
+      <div class="field">
+        <span class="field-label">Capability cap — the highest level JARVIS may use</span>
+        <div class="models-actions" id="permissions-cap-row"></div>
+        <p class="field-hint" id="permissions-cap-note"></p>
+      </div>
+      <div class="field">
+        <span class="field-label">Registered tools (from the server registry)</span>
+        <ul class="provider-list" id="permissions-tools"></ul>
+      </div>
+      <div class="field">
+        <span class="field-label">Security audit — authorization decisions</span>
+        <div class="models-actions">
+          <button type="button" class="btn" id="permissions-audit-refresh">Refresh audit log</button>
+          <span class="field-hint" id="permissions-audit-state"></span>
+        </div>
+        <ul class="provider-list" id="permissions-audit"></ul>
+      </div>
+    </section>
+
+    <section class="settings-tab" id="settings-provider-tab" aria-label="Provider credentials">
+      <ol class="provider-list" id="provider-list"></ol>
+      <p class="modal-note">“Test connection” verifies the provider catalog and credential — it never runs an inference request. A key set through the environment cannot be replaced or cleared here.</p>
+    </section>
+
+    <section class="settings-tab" id="settings-model-tab" aria-label="Model routing" hidden>
+      <label class="field">
+        <span class="field-label">Active provider</span>
+        <select id="settings-provider-select"></select>
+      </label>
+      <label class="field">
+        <span class="field-label">Model policy</span>
+        <input type="text" id="settings-model-input" maxlength="128" autocomplete="off" placeholder="provider default" list="settings-model-options">
+        <span class="field-hint" id="settings-model-hint"></span>
+      </label>
+      <p class="field-hint" data-catalog-meta></p>
+      <label class="field">
+        <span class="field-label">Fallback model (optional)</span>
+        <input type="text" id="settings-fallback-input" maxlength="128" autocomplete="off" placeholder="none" list="settings-model-options">
+      </label>
+      <datalist id="settings-model-options"></datalist>
+      <label class="check-row">
+        <input type="checkbox" id="settings-confirm-cost">
+        <span>Confirm potential metered cost for paid or unknown-cost models</span>
+      </label>
+      <div class="models-actions">
+        <button type="button" class="btn btn-primary" id="settings-apply">Apply model routing</button>
+        <button type="button" class="btn" id="settings-model-test">Test model (one bounded reply)</button>
+      </div>
+      <p class="field-hint" id="settings-probe-result" hidden></p>
+      <p class="modal-note">“Apply” is the only activation path: the provider catalog is validated first, and a failure leaves the current setup untouched. A listed model is configuration, not proof of verified inference.</p>
+    </section>
+
+    <section class="settings-tab" id="settings-runtime-tab" aria-label="Application runtime" hidden>
+      <div class="field-row">
+        <label class="field">
+          <span class="field-label">Provider timeout (seconds)</span>
+          <input type="number" id="settings-timeout-input" min="1" max="300" autocomplete="off">
+        </label>
+        <label class="field">
+          <span class="field-label">Max tokens per reply</span>
+          <input type="number" id="settings-max-tokens-input" min="1" max="4096" autocomplete="off">
+        </label>
+        <label class="field">
+          <span class="field-label">History messages kept</span>
+          <input type="number" id="settings-history-input" min="1" max="100" autocomplete="off">
+        </label>
+      </div>
+      <label class="field">
+        <span class="field-label">Reviewer (optional)</span>
+        <input type="text" id="settings-reviewer-input" maxlength="64" autocomplete="off" placeholder="none">
+      </label>
+      <div class="models-actions">
+        <button type="button" class="btn btn-primary" id="settings-runtime-save">Save application settings</button>
+      </div>
+      <p class="field-hint" id="settings-runtime-note"></p>
+      <p class="modal-note">Locked fields are managed by deployment environment variables; the value shown is the effective one and cannot be changed here.</p>
+    </section>
+  </div>
+</dialog>
+
+<!-- Goal console (durable goals: create, watch, cancel/retry) -->
+<dialog class="modal" id="modal-goals" aria-labelledby="goals-title">
+  <header class="modal-head">
+    <h2 class="modal-title" id="goals-title">Goal Console</h2>
+    <button type="button" class="icon-btn pop-close" data-close-modal="modal-goals" aria-label="Close goal console"><svg class="ic"><use href="#i-x"/></svg></button>
+  </header>
+  <div class="modal-body" id="goals-body">
+    <p class="modal-note">Goals are durable and processed by the local server worker — planning and tool execution happen server-side while this console shows persisted truth. Registered tools are scoped and verified; nothing here executes shell commands.</p>
+    <form class="goal-form" id="goal-form">
+      <label class="field">
+        <span class="field-label">Objective</span>
+        <textarea id="goal-objective" rows="2" maxlength="500" required placeholder="e.g. Inventory the workspace files"></textarea>
+      </label>
+      <label class="field">
+        <span class="field-label">Execution mode</span>
+        <select id="goal-mode">
+          <option value="sequential" selected>Sequential — plan first, then execute (default)</option>
+          <option value="dynamic">Dynamic — bounded observe → decide loop with a verified success contract</option>
+        </select>
+      </label>
+      <div class="field-row">
+        <button type="submit" class="btn btn-primary" id="goal-submit">Queue Goal</button>
+      </div>
+    </form>
+    <p class="models-error" id="goals-error" hidden></p>
+    <ol class="goal-list" id="goals-list" aria-label="Durable goals"></ol>
+    <section class="goal-detail" id="goal-detail" hidden aria-label="Goal detail"></section>
+  </div>
+</dialog>
+
 <!-- Executive briefing modal -->
 <dialog class="modal modal-brief" id="modal-brief" aria-labelledby="brief-title">
   <header class="modal-head">
-    <h2 class="modal-title" id="brief-title">Executive Briefing <span class="chip chip-demo chip-inline">Visible demo data only</span></h2>
+    <h2 class="modal-title" id="brief-title">Executive Briefing <span class="chip chip-demo chip-inline">Briefing is not AI-generated</span></h2>
     <button type="button" class="icon-btn pop-close" id="brief-close" aria-label="Close executive briefing"><svg class="ic"><use href="#i-x"/></svg></button>
   </header>
   <div class="modal-body" id="brief-body"></div>
 </dialog>
 
-<template id="tpl-feed-item">
-  <li class="feed-item">
-    <span class="feed-icon"><svg class="ic"><use class="use-target" href="#i-info"/></svg></span>
-    <div class="feed-body">
-      <p class="feed-title"></p>
-      <p class="feed-desc"></p>
-      <p class="feed-meta"><span class="feed-time"></span><span class="feed-tag"></span></p>
-    </div>
-  </li>
-</template>
-
+<script src="jarvis-format.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

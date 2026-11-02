@@ -1,0 +1,37 @@
+# Runtime data — never commit
+data/
+*.db
+*.db-shm
+*.db-wal
+
+# Secrets and local env
+.env
+.env.*
+!config.example.env
+
+# Python artifacts
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+
+# Virtual environments
+.venv/
+venv/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Local development
+.DS_Store
+*.log
